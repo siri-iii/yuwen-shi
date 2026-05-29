@@ -1,0 +1,114 @@
+{
+  "dragon": {
+    "pattern_id": "dragon",
+    "name": "龙纹",
+    "visual_features": "身体盘曲、线条流动，常带有兽首、卷尾或云气装饰，整体呈S形或C形蜿蜒造型。",
+    "cultural_meaning": "龙纹象征祥瑞、权力与礼制，是中国玉器中最具代表性的传统纹样，代表帝王权威与天地沟通。",
+    "common_objects": ["玉佩", "玉璧", "玉带钩", "玉饰件"],
+    "periods": ["春秋战国", "汉代", "明清"],
+    "appreciation_tips": "观察龙首造型、身形曲线、线条节奏，以及纹样与器物功能之间的关系。",
+    "keywords": ["龙", "祥瑞", "礼制", "权力"],
+    "image_examples": [
+      "/static/images/dragon/dragon_01.jpg",
+      "/static/images/dragon/dragon_02.jpg"
+    ]
+  },
+  "phoenix": {
+    "pattern_id": "phoenix",
+    "name": "凤鸟纹",
+    "visual_features": "长尾飞翔形态，羽翼舒展，头部多有冠饰，线条优美流畅，常呈侧视展翅姿态。",
+    "cultural_meaning": "凤鸟纹象征美好、吉祥与高贵，常与龙纹配对出现，代表阴阳调和与天下太平。",
+    "common_objects": ["玉佩", "玉簪", "玉璜", "玉饰件"],
+    "periods": ["商周", "春秋战国", "汉代"],
+    "appreciation_tips": "注意羽毛纹理的细腻程度、尾部造型的舒展感及整体线条的流动性。",
+    "keywords": ["凤", "祥瑞", "吉祥", "高贵"],
+    "image_examples": [
+      "/static/images/phoenix/phoenix_01.jpg",
+      "/static/images/phoenix/phoenix_02.jpg"
+    ]
+  },
+  "beast_face": {
+    "pattern_id": "beast_face",
+    "name": "兽面纹",
+    "visual_features": "以正面兽首为主体，双目圆睁，两侧有对称装饰，图案庄严威仪，常见于器物正中位置。",
+    "cultural_meaning": "兽面纹与礼仪、祭祀、神秘力量相关，是商周时期礼器的核心纹样，具有沟通天地、辟除邪祟的宗教含义。",
+    "common_objects": ["玉琮", "玉璧", "玉斧", "玉礼器"],
+    "periods": ["良渚文化", "商代", "西周"],
+    "appreciation_tips": "观察眼部造型的夸张程度与整体构图的对称性，感受其庄严肃穆的宗教气息。",
+    "keywords": ["兽面", "饕餮", "礼器", "祭祀"],
+    "image_examples": [
+      "/static/images/beast_face/beast_face_01.jpg",
+      "/static/images/beast_face/beast_face_02.jpg"
+    ]
+  },
+  "cloud_thunder": {
+    "pattern_id": "cloud_thunder",
+    "name": "云雷纹",
+    "visual_features": "以回旋方折线条构成，圆形卷曲为云纹，方形折角为雷纹，常作满地底纹或边框装饰出现。",
+    "cultural_meaning": "云雷纹是几何化的自然崇拜符号，象征天空与雷电的神秘力量，体现先民对自然现象的敬畏与崇拜。",
+    "common_objects": ["玉璧", "玉琮", "玉戈", "玉礼器"],
+    "periods": ["新石器时代晚期", "商周", "春秋"],
+    "appreciation_tips": "注意线条的均匀性和方圆转折的规律性，感受其几何美感与严整的秩序感。",
+    "keywords": ["云", "雷", "几何", "天空崇拜"],
+    "image_examples": [
+      "/static/images/cloud_thunder/cloud_thunder_01.jpg",
+      "/static/images/cloud_thunder/cloud_thunder_02.jpg"
+    ]
+  },
+  "grain": {
+    "pattern_id": "grain",
+    "name": "谷纹",
+    "visual_features": "圆形凸起颗粒均匀密布于器物表面，形似发芽的谷粒，颗粒饱满、排列规整，有时顶端带有螺旋小尾。",
+    "cultural_meaning": "谷纹象征五谷丰登、农业丰收，寄托对粮食充足、生活富足的美好愿望，是战汉玉璧上最常见的吉祥纹样。",
+    "common_objects": ["玉璧", "玉环", "玉玦"],
+    "periods": ["战国", "汉代"],
+    "appreciation_tips": "观察谷粒凸起的饱满程度和排列的均匀性，感受其朴素自然的农耕文化内涵。",
+    "keywords": ["谷粒", "丰收", "玉璧", "农业"],
+    "image_examples": [
+      "/static/images/grain/grain_01.jpg",
+      "/static/images/grain/grain_02.jpg"
+    ]
+  },
+  "rush": {
+    "pattern_id": "rush",
+    "name": "蒲纹",
+    "visual_features": "以六边形格子为基本单元铺满器面，格内填以凸起颗粒，整体形似蒲草编织的席纹，层次分明。",
+    "cultural_meaning": "蒲纹取材于蒲草编织，寓意朴素勤劳，蒲草是古代重要的礼仪用材，以此纹饰玉璧具有敬天礼地的文化含义。",
+    "common_objects": ["玉璧", "玉环"],
+    "periods": ["战国", "汉代"],
+    "appreciation_tips": "注意六边形网格的规整程度，以及凸起颗粒与网格线条之间的层次感与立体感。",
+    "keywords": ["蒲席", "六边形", "编织", "礼器"],
+    "image_examples": [
+      "/static/images/rush/rush_01.jpg",
+      "/static/images/rush/rush_02.jpg"
+    ]
+  },
+  "chi": {
+    "pattern_id": "chi",
+    "name": "螭纹",
+    "visual_features": "螭为无角之龙，身形蜿蜒细长，四肢短小有力，常多条螭龙缠绕交错，构图饱满而富有动感。",
+    "cultural_meaning": "螭纹象征吉祥辟邪，装饰性强，汉代以后广泛流行，是玉器走向世俗化的重要标志。",
+    "common_objects": ["玉佩", "玉环", "玉带钩", "玉剑饰"],
+    "periods": ["汉代", "唐代", "明清"],
+    "appreciation_tips": "注意螭龙身体的穿插关系和缠绕构图的复杂程度，感受其旺盛的生命力与精湛的镂雕工艺。",
+    "keywords": ["螭龙", "辟邪", "缠绕", "装饰"],
+    "image_examples": [
+      "/static/images/chi/chi_01.jpg",
+      "/static/images/chi/chi_02.jpg"
+    ]
+  },
+  "string": {
+    "pattern_id": "string",
+    "name": "弦纹",
+    "visual_features": "由一至三道平行细线条环绕器物一周，线条简洁流畅，间距均匀，常出现在器物腰部或口沿处。",
+    "cultural_meaning": "弦纹是最简洁的几何纹样，象征界分与秩序，常作为不同纹样区域的分隔线，体现以简驭繁的装饰哲学。",
+    "common_objects": ["玉琮", "玉管", "玉璧", "玉柄形器"],
+    "periods": ["新石器时代", "商周", "历代均有"],
+    "appreciation_tips": "注意线条的流畅度和间距均匀性，体会极简装饰风格背后的秩序美学。",
+    "keywords": ["线条", "简洁", "几何", "界分"],
+    "image_examples": [
+      "/static/images/string/string_01.jpg",
+      "/static/images/string/string_02.jpg"
+    ]
+  }
+}

@@ -1,0 +1,242 @@
+[
+  {
+    "artifact_id": "A001",
+    "name": "战国龙纹玉佩",
+    "pattern": "dragon",
+    "period": "战国",
+    "object_type": "玉佩",
+    "image": "/static/images/dragon/dragon_01.jpg",
+    "description": "玉佩呈扁平状，正面以阴线雕刻盘曲龙形，线条流动自然，龙首回望，尾部卷曲，体现战国时期玉器装饰的动态审美。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A002",
+    "name": "汉代龙纹玉璧",
+    "pattern": "dragon",
+    "period": "汉代",
+    "object_type": "玉璧",
+    "image": "/static/images/dragon/dragon_02.jpg",
+    "description": "玉璧外缘饰以浅浮雕双龙纹，龙身蜿蜒缠绕，与内圈谷纹形成繁简对比，是汉代礼仪用玉的典型代表。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A003",
+    "name": "明代龙纹玉带钩",
+    "pattern": "dragon",
+    "period": "明代",
+    "object_type": "玉带钩",
+    "image": "/static/images/dragon/dragon_03.jpg",
+    "description": "带钩钩首雕作龙头造型，龙口微张，眼神炯炯，钩身以云纹衬托，工艺精细，是明代宫廷用玉的代表器物。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A004",
+    "name": "春秋凤鸟纹玉璜",
+    "pattern": "phoenix",
+    "period": "春秋",
+    "object_type": "玉璜",
+    "image": "/static/images/phoenix/phoenix_01.jpg",
+    "description": "玉璜呈弧形，两端以阴线刻画凤鸟头部，羽冠飞扬，尾羽舒展，线条简练流畅，体现春秋时期凤鸟纹的典型风格。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A005",
+    "name": "战国凤鸟纹玉佩",
+    "pattern": "phoenix",
+    "period": "战国",
+    "object_type": "玉佩",
+    "image": "/static/images/phoenix/phoenix_02.jpg",
+    "description": "玉佩镂空雕刻展翅凤鸟，羽翼舒展，长尾飘逸，以细阴线刻画羽毛纹理，造型优美，是战国镂雕玉器的精品。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A006",
+    "name": "汉代凤鸟纹玉饰",
+    "pattern": "phoenix",
+    "period": "汉代",
+    "object_type": "玉饰件",
+    "image": "/static/images/phoenix/phoenix_03.jpg",
+    "description": "玉饰呈扁平片状，以浅浮雕技法表现凤鸟侧面形象，头顶高冠，长尾上扬，整体造型生动，玉质温润。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A007",
+    "name": "良渚文化兽面纹玉琮",
+    "pattern": "beast_face",
+    "period": "良渚文化",
+    "object_type": "玉琮",
+    "image": "/static/images/beast_face/beast_face_01.jpg",
+    "description": "玉琮外壁以细阴线雕刻神人兽面纹，双眼圆睁，以鼻梁为中轴左右对称，是良渚文化最具代表性的礼器纹样。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A008",
+    "name": "商代兽面纹玉璧",
+    "pattern": "beast_face",
+    "period": "商代",
+    "object_type": "玉璧",
+    "image": "/static/images/beast_face/beast_face_02.jpg",
+    "description": "玉璧表面以浮雕技法刻画兽面纹，眼部突出，造型威严，是商代玉礼器中常见的祭祀装饰题材。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A009",
+    "name": "西周兽面纹玉斧",
+    "pattern": "beast_face",
+    "period": "西周",
+    "object_type": "玉斧",
+    "image": "/static/images/beast_face/beast_face_03.jpg",
+    "description": "玉斧正面饰以兽面纹，双目对称分布，辅以云雷纹地纹，整体庄严肃穆，为西周礼仪用器。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A010",
+    "name": "商代云雷纹玉戈",
+    "pattern": "cloud_thunder",
+    "period": "商代",
+    "object_type": "玉戈",
+    "image": "/static/images/cloud_thunder/cloud_thunder_01.jpg",
+    "description": "玉戈援部饰以细密云雷纹，方折线条均匀规整，以回旋纹填满空间，是商代玉兵器中常见的装饰手法。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A011",
+    "name": "西周云雷纹玉琮",
+    "pattern": "cloud_thunder",
+    "period": "西周",
+    "object_type": "玉琮",
+    "image": "/static/images/cloud_thunder/cloud_thunder_02.jpg",
+    "description": "玉琮射部饰以云雷纹边框，线条方折规整，与器物整体造型相协调，体现西周礼器纹样的严谨风格。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A012",
+    "name": "春秋云雷纹玉璧",
+    "pattern": "cloud_thunder",
+    "period": "春秋",
+    "object_type": "玉璧",
+    "image": "/static/images/cloud_thunder/cloud_thunder_03.jpg",
+    "description": "玉璧内圈以云雷纹为地，外缘饰以龙纹，繁密的云雷纹底纹烘托出龙纹的立体感，层次丰富。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A013",
+    "name": "战国谷纹玉璧",
+    "pattern": "grain",
+    "period": "战国",
+    "object_type": "玉璧",
+    "image": "/static/images/grain/grain_01.jpg",
+    "description": "玉璧表面均匀分布圆形凸起谷粒纹，颗粒饱满，排列整齐，外缘以绹纹为框，是战国谷纹璧的经典样式。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A014",
+    "name": "汉代谷纹玉环",
+    "pattern": "grain",
+    "period": "汉代",
+    "object_type": "玉环",
+    "image": "/static/images/grain/grain_02.jpg",
+    "description": "玉环两面均饰谷纹，谷粒顶端带有螺旋小尾，排列均匀，玉质青白，为汉代随葬常见器物。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A015",
+    "name": "汉代谷纹玉玦",
+    "pattern": "grain",
+    "period": "汉代",
+    "object_type": "玉玦",
+    "image": "/static/images/grain/grain_03.jpg",
+    "description": "玉玦表面满布谷纹，器形规整，缺口光滑，谷粒凸起均匀饱满，体现汉代玉工高超的碾琢技艺。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A016",
+    "name": "战国蒲纹玉璧",
+    "pattern": "rush",
+    "period": "战国",
+    "object_type": "玉璧",
+    "image": "/static/images/rush/rush_01.jpg",
+    "description": "玉璧表面以六边形蒲纹布满器面，格内填以凸起颗粒，纹样规整细密，外缘饰绹纹，是战国蒲纹璧的标准器。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A017",
+    "name": "汉代蒲纹玉璧",
+    "pattern": "rush",
+    "period": "汉代",
+    "object_type": "玉璧",
+    "image": "/static/images/rush/rush_02.jpg",
+    "description": "玉璧内区饰蒲纹，外区饰龙凤纹，内外两区对比鲜明，蒲纹六边形网格清晰，为汉代礼仪用璧。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A018",
+    "name": "战国蒲纹玉环",
+    "pattern": "rush",
+    "period": "战国",
+    "object_type": "玉环",
+    "image": "/static/images/rush/rush_03.jpg",
+    "description": "玉环两面饰蒲纹，六边形格子均匀分布，颗粒凸起清晰，玉质温润，造型简洁，是战国玉环的常见纹样。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A019",
+    "name": "汉代螭纹玉带钩",
+    "pattern": "chi",
+    "period": "汉代",
+    "object_type": "玉带钩",
+    "image": "/static/images/chi/chi_01.jpg",
+    "description": "带钩钩身以浮雕技法饰螭纹，螭龙身形蜿蜒，四肢攀附于钩面，造型生动，是汉代螭纹玉器的代表作品。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A020",
+    "name": "汉代螭纹玉剑饰",
+    "pattern": "chi",
+    "period": "汉代",
+    "object_type": "玉剑饰",
+    "image": "/static/images/chi/chi_02.jpg",
+    "description": "玉剑饰表面以高浮雕螭龙为主题，螭龙回首顾望，身体盘曲于器面，立体感强，展示汉代玉雕的精湛技艺。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A021",
+    "name": "明代螭纹玉佩",
+    "pattern": "chi",
+    "period": "明代",
+    "object_type": "玉佩",
+    "image": "/static/images/chi/chi_03.jpg",
+    "description": "玉佩以镂空雕刻双螭纹，两条螭龙相互缠绕，构图饱满，玉质白润，是明代螭纹佩饰的典型样式。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A022",
+    "name": "良渚文化弦纹玉琮",
+    "pattern": "string",
+    "period": "良渚文化",
+    "object_type": "玉琮",
+    "image": "/static/images/string/string_01.jpg",
+    "description": "玉琮各节之间以阴刻弦纹分隔，线条细腻流畅，将琮体划分为若干层级，强调礼器的层次感与秩序感。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A023",
+    "name": "商代弦纹玉管",
+    "pattern": "string",
+    "period": "商代",
+    "object_type": "玉管",
+    "image": "/static/images/string/string_02.jpg",
+    "description": "玉管外壁饰两道弦纹，将管体分为三段，线条均匀规整，是商代组玉佩中常见的素面管珠装饰手法。",
+    "source": "公开博物馆资料"
+  },
+  {
+    "artifact_id": "A024",
+    "name": "西周弦纹玉柄形器",
+    "pattern": "string",
+    "period": "西周",
+    "object_type": "玉柄形器",
+    "image": "/static/images/string/string_03.jpg",
+    "description": "玉柄形器通体以多道弦纹分段，线条简洁有力，与器物细长造型相协调，体现西周玉礼器以简胜繁的审美风格。",
+    "source": "公开博物馆资料"
+  }
+]

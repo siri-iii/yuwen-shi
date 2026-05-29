@@ -1,0 +1,66 @@
+{
+  "dragon_demo_01.jpg": {
+    "pattern_id": "dragon",
+    "confidence": 0.92
+  },
+  "dragon_demo_02.jpg": {
+    "pattern_id": "dragon",
+    "confidence": 0.88
+  },
+  "phoenix_demo_01.jpg": {
+    "pattern_id": "phoenix",
+    "confidence": 0.90
+  },
+  "phoenix_demo_02.jpg": {
+    "pattern_id": "phoenix",
+    "confidence": 0.85
+  },
+  "beast_face_demo_01.jpg": {
+    "pattern_id": "beast_face",
+    "confidence": 0.91
+  },
+  "beast_face_demo_02.jpg": {
+    "pattern_id": "beast_face",
+    "confidence": 0.87
+  },
+  "cloud_thunder_demo_01.jpg": {
+    "pattern_id": "cloud_thunder",
+    "confidence": 0.89
+  },
+  "cloud_thunder_demo_02.jpg": {
+    "pattern_id": "cloud_thunder",
+    "confidence": 0.84
+  },
+  "grain_demo_01.jpg": {
+    "pattern_id": "grain",
+    "confidence": 0.93
+  },
+  "grain_demo_02.jpg": {
+    "pattern_id": "grain",
+    "confidence": 0.86
+  },
+  "rush_demo_01.jpg": {
+    "pattern_id": "rush",
+    "confidence": 0.90
+  },
+  "rush_demo_02.jpg": {
+    "pattern_id": "rush",
+    "confidence": 0.85
+  },
+  "chi_demo_01.jpg": {
+    "pattern_id": "chi",
+    "confidence": 0.88
+  },
+  "chi_demo_02.jpg": {
+    "pattern_id": "chi",
+    "confidence": 0.83
+  },
+  "string_demo_01.jpg": {
+    "pattern_id": "string",
+    "confidence": 0.94
+  },
+  "string_demo_02.jpg": {
+    "pattern_id": "string",
+    "confidence": 0.87
+  }
+}
