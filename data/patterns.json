@@ -9,8 +9,8 @@
     "appreciation_tips": "观察龙首造型、身形曲线、线条节奏，以及纹样与器物功能之间的关系。",
     "keywords": ["龙", "祥瑞", "礼制", "权力"],
     "image_examples": [
-      "/static/images/dragon/dragon_01.jpg",
-      "/static/images/dragon/dragon_02.jpg"
+      "/static/images/dragon/dragon_01.png",
+      "/static/images/dragon/dragon_02.png"
     ]
   },
   "phoenix": {
@@ -23,8 +23,8 @@
     "appreciation_tips": "注意羽毛纹理的细腻程度、尾部造型的舒展感及整体线条的流动性。",
     "keywords": ["凤", "祥瑞", "吉祥", "高贵"],
     "image_examples": [
-      "/static/images/phoenix/phoenix_01.jpg",
-      "/static/images/phoenix/phoenix_02.jpg"
+      "/static/images/phoenix/phoenix_01.png",
+      "/static/images/phoenix/phoenix_02.png"
     ]
   },
   "beast_face": {
@@ -37,8 +37,8 @@
     "appreciation_tips": "观察眼部造型的夸张程度与整体构图的对称性，感受其庄严肃穆的宗教气息。",
     "keywords": ["兽面", "饕餮", "礼器", "祭祀"],
     "image_examples": [
-      "/static/images/beast_face/beast_face_01.jpg",
-      "/static/images/beast_face/beast_face_02.jpg"
+      "/static/images/beast_face/beast_face_01.png",
+      "/static/images/beast_face/beast_face_02.png"
     ]
   },
   "cloud_thunder": {
@@ -65,7 +65,7 @@
     "appreciation_tips": "观察谷粒凸起的饱满程度和排列的均匀性，感受其朴素自然的农耕文化内涵。",
     "keywords": ["谷粒", "丰收", "玉璧", "农业"],
     "image_examples": [
-      "/static/images/grain/grain_01.jpg",
+      "/static/images/grain/grain_01.png",
       "/static/images/grain/grain_02.jpg"
     ]
   },
@@ -79,7 +79,7 @@
     "appreciation_tips": "注意六边形网格的规整程度，以及凸起颗粒与网格线条之间的层次感与立体感。",
     "keywords": ["蒲席", "六边形", "编织", "礼器"],
     "image_examples": [
-      "/static/images/rush/rush_01.jpg",
+      "/static/images/rush/rush_01.png",
       "/static/images/rush/rush_02.jpg"
     ]
   },
@@ -93,8 +93,8 @@
     "appreciation_tips": "注意螭龙身体的穿插关系和缠绕构图的复杂程度，感受其旺盛的生命力与精湛的镂雕工艺。",
     "keywords": ["螭龙", "辟邪", "缠绕", "装饰"],
     "image_examples": [
-      "/static/images/chi/chi_01.jpg",
-      "/static/images/chi/chi_02.jpg"
+      "/static/images/chi/chi_01.png",
+      "/static/images/chi/chi_02.png"
     ]
   },
   "string": {
@@ -108,7 +108,7 @@
     "keywords": ["线条", "简洁", "几何", "界分"],
     "image_examples": [
       "/static/images/string/string_01.jpg",
-      "/static/images/string/string_02.jpg"
+      "/static/images/string/string_02.png"
     ]
   }
 }
