@@ -3,157 +3,240 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>玉纹识 - AI 玉器纹样识别与文化解读系统</title>
+  <title>玉纹识 · AI 玉器纹样识别与文化解读</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <div class="page-bg" aria-hidden="true"></div>
+
   <header class="topbar">
-    <div class="brand">玉纹识</div>
+    <a class="brand" href="#" data-view="home">
+      <img class="brand-logo" src="./assets/images/logo.png" alt="" onerror="this.style.display='none'" />
+      <span class="brand-mark">纹</span>
+      <span class="brand-text">玉纹识</span>
+    </a>
     <nav class="nav">
       <button class="nav-btn active" data-view="home">首页</button>
-      <button class="nav-btn" data-view="recognize">开始识别</button>
+      <button class="nav-btn" data-view="recognize">纹样识别</button>
+      <button class="nav-btn" data-view="result">识别结果</button>
       <button class="nav-btn" data-view="knowledge">知识库</button>
       <button class="nav-btn" data-view="about">项目说明</button>
     </nav>
+    <span id="backend-status" class="status-pill">检查中</span>
   </header>
 
   <main class="container">
+    <!-- 首页 -->
     <section id="view-home" class="view active">
       <div class="hero">
-        <h1>AI 玉器纹样识别与文化解读系统</h1>
-        <p>上传玉器图片，识别传统纹样，理解文化内涵。</p>
-        <div class="hero-actions">
-          <button id="home-start-btn" class="btn primary">开始识别</button>
-          <button id="home-knowledge-btn" class="btn">浏览知识库</button>
+        <div class="hero-media">
+          <img class="hero-accent" src="./assets/images/hero-accent.png" alt="" onerror="this.style.display='none'" />
+        </div>
+        <div class="hero-content">
+          <p class="eyebrow">AI · 玉器纹样 · 文化解读</p>
+          <h1>玉纹识</h1>
+          <p class="hero-lead">上传玉器影像，识别传统纹样，读懂千年玉文化。</p>
+          <div class="hero-actions">
+            <button id="home-start-btn" class="btn btn-gold">开始识别</button>
+            <button id="home-knowledge-btn" class="btn btn-ghost">浏览知识库</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-num">8</span><span class="stat-label">类纹样</span></div>
+            <div class="stat"><span class="stat-num">24+</span><span class="stat-label">玉器案例</span></div>
+            <div class="stat"><span class="stat-num">AI</span><span class="stat-label">文化讲解</span></div>
+          </div>
         </div>
       </div>
+
+      <div class="section-head">
+        <h2>系统能力</h2>
+        <p>面向学习者的交互式鉴赏原型</p>
+      </div>
       <div class="feature-grid">
-        <article class="card">
-          <h3>图像识别</h3>
-          <p>上传图片后调用后端接口返回纹样类别与匹配度。</p>
+        <article class="feature-card">
+          <span class="feature-icon">识</span>
+          <h3>纹样识别</h3>
+          <p>上传或选择示例图，返回可能纹样与匹配度。</p>
         </article>
-        <article class="card">
+        <article class="feature-card">
+          <span class="feature-icon">释</span>
           <h3>文化解读</h3>
-          <p>自动生成纹样文化解释文本，辅助理解纹样意义。</p>
+          <p>基于知识库生成稳定、可读的文化讲解文本。</p>
         </article>
-        <article class="card">
+        <article class="feature-card">
+          <span class="feature-icon">荐</span>
           <h3>相似案例</h3>
-          <p>展示同类纹样玉器案例，包含器物名、朝代与简介。</p>
+          <p>推荐同纹样的器物名称、朝代与器型信息。</p>
         </article>
-        <article class="card">
-          <h3>知识库浏览</h3>
-          <p>浏览 8 类纹样，按关键词与器型快速筛选。</p>
+        <article class="feature-card">
+          <span class="feature-icon">库</span>
+          <h3>纹样知识库</h3>
+          <p>八类纹样结构化浏览，支持关键词与器型筛选。</p>
         </article>
       </div>
     </section>
 
+    <!-- 识别 -->
     <section id="view-recognize" class="view">
-      <div class="panel">
-        <h2>上传识别</h2>
-        <p class="muted">支持 jpg / jpeg / png。建议优先使用示例图片保证演示稳定。</p>
-        <div class="form-row">
-          <input id="file-input" type="file" accept="image/png,image/jpeg" />
-          <button id="recognize-btn" class="btn primary">开始识别</button>
-        </div>
-        <div id="selected-file-tip" class="muted"></div>
+      <div class="section-head">
+        <h2>纹样识别</h2>
+        <p>支持 jpg / png · 演示建议优先使用示例图片</p>
       </div>
 
-      <div class="panel">
-        <h3>示例图片</h3>
-        <p class="muted">点击任一示例将自动准备对应文件名并可直接识别。</p>
+      <div class="recognize-layout">
+        <div class="panel glass">
+          <label id="file-drop-zone" class="drop-zone" for="file-input">
+            <input id="file-input" type="file" accept="image/png,image/jpeg" hidden />
+            <span class="drop-icon">↑</span>
+            <span class="drop-title">点击或拖拽上传玉器图片</span>
+            <span class="drop-hint">字段名将作为演示映射依据（示例图请用预设文件名）</span>
+          </label>
+          <div id="selected-file-tip" class="file-tip muted"></div>
+          <button id="recognize-btn" class="btn btn-gold btn-block">开始识别</button>
+        </div>
+
+        <div class="panel glass preview-panel">
+          <h3 class="panel-title">预览</h3>
+          <div class="preview-wrap preview-wrap--tall">
+            <img id="preview-image" alt="预览图" />
+            <div id="preview-placeholder" class="preview-placeholder">
+              <span>尚未选择图片</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel glass">
+        <h3 class="panel-title">示例图片 <span class="badge">演示稳定</span></h3>
+        <p class="muted">点击卡片自动选用对应 demo 文件名，识别结果可重复。</p>
         <div id="demo-grid" class="demo-grid"></div>
       </div>
 
-      <div class="panel">
-        <h3>图片预览</h3>
-        <div class="preview-wrap">
-          <img id="preview-image" alt="预览图" />
-          <div id="preview-placeholder" class="muted">尚未选择图片</div>
-        </div>
+      <div id="loading-box" class="loading-overlay hidden" aria-live="polite">
+        <div class="spinner"></div>
+        <p>正在分析纹样特征…</p>
       </div>
-
-      <div id="loading-box" class="loading hidden">正在分析纹样特征，请稍候...</div>
-      <div id="recognize-error" class="error hidden"></div>
+      <div id="recognize-error" class="alert alert-error hidden"></div>
     </section>
 
+    <!-- 结果 -->
     <section id="view-result" class="view">
-      <div class="panel">
+      <div class="section-head">
         <h2>识别结果</h2>
-        <div id="result-empty" class="muted">还没有识别结果，请先前往“开始识别”。</div>
-        <div id="result-content" class="hidden">
-          <div class="result-layout">
-            <div>
-              <h3 id="result-pattern-name"></h3>
-              <p id="result-confidence"></p>
-              <p id="result-note" class="muted"></p>
-              <p id="result-visual-reason"></p>
-              <h4>AI 文化讲解</h4>
-              <p id="result-explanation" class="text-block"></p>
-            </div>
-            <div class="preview-wrap">
-              <img id="result-image" alt="识别原图" />
-            </div>
-          </div>
+        <p>纹样判断 · 文化解读 · 相似案例</p>
+      </div>
 
-          <div class="split">
-            <div>
-              <h4>文化信息</h4>
-              <ul id="knowledge-list"></ul>
+      <div id="result-empty" class="empty-state">
+        <p>还没有识别结果</p>
+        <button class="btn btn-gold" type="button" data-goto="recognize">去上传识别</button>
+      </div>
+
+      <div id="result-content" class="hidden">
+        <div class="result-hero panel glass">
+          <div class="result-hero-text">
+            <p class="eyebrow">可能识别为</p>
+            <h3 id="result-pattern-name"></h3>
+            <div class="confidence-wrap">
+              <div class="confidence-bar" aria-hidden="true">
+                <div id="result-confidence-fill" class="confidence-fill"></div>
+              </div>
+              <p id="result-confidence" class="confidence-label"></p>
             </div>
-            <div>
-              <h4>相似案例</h4>
-              <div id="artifact-list" class="artifact-list"></div>
-            </div>
+            <p id="result-note" class="result-note"></p>
+            <p id="result-visual-reason" class="visual-reason"></p>
+          </div>
+          <div class="preview-wrap result-image-wrap">
+            <img id="result-image" alt="识别原图" />
+          </div>
+        </div>
+
+        <div class="panel glass">
+          <h3 class="panel-title">AI 文化讲解</h3>
+          <p id="result-explanation" class="text-block explanation"></p>
+        </div>
+
+        <div class="split">
+          <div class="panel glass">
+            <h3 class="panel-title">文化信息</h3>
+            <ul id="knowledge-list" class="info-list"></ul>
+          </div>
+          <div class="panel glass">
+            <h3 class="panel-title">相似案例</h3>
+            <div id="artifact-list" class="artifact-list artifact-list--grid"></div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- 知识库 -->
     <section id="view-knowledge" class="view">
-      <div class="panel">
+      <div class="section-head">
         <h2>纹样知识库</h2>
-        <div class="form-row">
-          <input id="search-input" type="text" placeholder="输入纹样名或关键词" />
-          <select id="object-filter">
-            <option value="">全部器型</option>
-          </select>
-        </div>
-        <div id="pattern-grid" class="pattern-grid"></div>
+        <p>八类常见玉器纹样 · 结构化检索</p>
       </div>
 
-      <div id="pattern-detail" class="panel hidden">
-        <h3 id="detail-name"></h3>
-        <p id="detail-visual"></p>
-        <p id="detail-meaning"></p>
-        <p id="detail-objects"></p>
-        <p id="detail-periods"></p>
-        <p id="detail-tips"></p>
-        <h4>该纹样案例</h4>
-        <div id="detail-artifacts" class="artifact-list"></div>
+      <div class="panel glass filters-bar">
+        <input id="search-input" class="input" type="text" placeholder="搜索纹样名或关键词…" />
+        <select id="object-filter" class="input select">
+          <option value="">全部器型</option>
+        </select>
+      </div>
+
+      <div id="pattern-grid" class="pattern-grid"></div>
+
+      <div id="pattern-detail" class="panel glass detail-panel hidden">
+        <div class="detail-header">
+          <h3 id="detail-name"></h3>
+        </div>
+        <div class="detail-grid">
+          <p id="detail-visual" class="detail-item"></p>
+          <p id="detail-meaning" class="detail-item"></p>
+          <p id="detail-objects" class="detail-item"></p>
+          <p id="detail-periods" class="detail-item"></p>
+          <p id="detail-tips" class="detail-item detail-item--full"></p>
+        </div>
+        <h4 class="panel-title">相关玉器案例</h4>
+        <div id="detail-artifacts" class="artifact-list artifact-list--grid"></div>
       </div>
     </section>
 
+    <!-- 项目说明 -->
     <section id="view-about" class="view">
-      <div class="panel">
+      <div class="section-head">
         <h2>项目说明</h2>
-        <p>
-          玉纹识是一个课程展示型系统，目标是帮助学习者通过图片识别理解玉器纹样与文化内涵。
-          系统强调展示流程完整与识别结果稳定，不用于专业鉴定。
-        </p>
-        <ul>
-          <li>核心流程：上传图片 → 纹样识别 → 文化解读 → 相似案例 → 知识库浏览</li>
-          <li>识别策略：示例文件名映射优先，未命中时 pHash 相似度回退</li>
-          <li>数据范围：8 类常见纹样，JSON 知识库与案例库</li>
-        </ul>
+        <p>课程展示型原型 · 非专业鉴定</p>
+      </div>
+      <div class="about-grid">
+        <div class="panel glass">
+          <h3>项目定位</h3>
+          <p>玉纹识帮助学习者通过「识别 + 解读 + 案例 + 知识库」理解玉器纹样，强调展示完整与流程顺畅。</p>
+        </div>
+        <div class="panel glass">
+          <h3>技术架构</h3>
+          <ul class="timeline">
+            <li><strong>前端</strong> 页面交互与结果展示</li>
+            <li><strong>后端</strong> Flask 接口 · 示例映射 + pHash</li>
+            <li><strong>数据</strong> JSON 知识库与案例库</li>
+          </ul>
+        </div>
+        <div class="panel glass">
+          <h3>使用边界</h3>
+          <ul class="timeline">
+            <li>不做真伪鉴定与精确断代</li>
+            <li>识别结果表述为「可能识别为」</li>
+            <li>非示例图结果仅供学习参考</li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>后端接口地址：</span>
+    <span>API</span>
     <code id="api-base-tip"></code>
-    <span class="dot">·</span>
-    <span id="backend-status">后端状态检查中...</span>
   </footer>
 
   <script src="./app.js"></script>

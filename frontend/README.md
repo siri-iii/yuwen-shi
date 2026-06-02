@@ -3,8 +3,9 @@
 ## 目录
 
 - `index.html`：页面入口（首页 / 识别 / 结果 / 知识库 / 项目说明）
-- `styles.css`：页面样式
+- `styles.css`：玉文化主题样式
 - `app.js`：前端交互与接口调用
+- `assets/images/`：装饰图片（见该目录下 README）
 
 ## 运行方式
 
@@ -35,6 +36,19 @@ http://127.0.0.1:5500
 - `GET /api/artifacts?pattern=<id>`
 - `POST /api/recognize`
 - 图片静态资源：`/static/images/<pattern>/<filename>`
+
+## 装饰图片放置
+
+详见 `assets/images/README.md`。常用：
+
+| 文件 | 路径 |
+|------|------|
+| 首页背景 | `assets/images/hero-bg.jpg` |
+| 首页装饰 | `assets/images/hero-accent.png` |
+| 导航 Logo | `assets/images/logo.png` |
+| 纹样封面 | `assets/images/patterns/dragon.jpg` 等 8 张 |
+
+未放置图片时自动使用渐变背景与后端示例图，不影响功能。
 
 ## 说明
 

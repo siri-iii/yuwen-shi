@@ -1,4 +1,5 @@
 const API_BASE = localStorage.getItem("YW_API_BASE") || "http://127.0.0.1:5000";
+const ASSETS = "./assets/images";
 
 const state = {
   patterns: {},
@@ -7,10 +8,12 @@ const state = {
   selectedFile: null,
   selectedPreviewUrl: "",
   latestResult: null,
+  selectedPatternId: null,
 };
 
 const els = {
   navBtns: document.querySelectorAll(".nav-btn"),
+  brandLink: document.querySelector(".brand"),
   views: {
     home: document.getElementById("view-home"),
     recognize: document.getElementById("view-recognize"),
@@ -21,6 +24,7 @@ const els = {
   homeStartBtn: document.getElementById("home-start-btn"),
   homeKnowledgeBtn: document.getElementById("home-knowledge-btn"),
   fileInput: document.getElementById("file-input"),
+  fileDropZone: document.getElementById("file-drop-zone"),
   selectedFileTip: document.getElementById("selected-file-tip"),
   previewImage: document.getElementById("preview-image"),
   previewPlaceholder: document.getElementById("preview-placeholder"),
@@ -32,6 +36,7 @@ const els = {
   resultContent: document.getElementById("result-content"),
   resultPatternName: document.getElementById("result-pattern-name"),
   resultConfidence: document.getElementById("result-confidence"),
+  resultConfidenceFill: document.getElementById("result-confidence-fill"),
   resultNote: document.getElementById("result-note"),
   resultVisualReason: document.getElementById("result-visual-reason"),
   resultExplanation: document.getElementById("result-explanation"),
@@ -64,6 +69,20 @@ function toApiUrl(path) {
   return `${API_BASE}${path}`;
 }
 
+function patternCoverUrl(pattern) {
+  const id = pattern.pattern_id || pattern.patternId;
+  if (id) return `${ASSETS}/patterns/${id}.jpg`;
+  const examples = pattern.image_examples || [];
+  if (examples[0]) return toApiUrl(examples[0]);
+  return "";
+}
+
+function imgOnError(el) {
+  el.onerror = null;
+  el.style.opacity = "0.35";
+  el.alt = "图片待补充";
+}
+
 function setActiveView(viewName) {
   Object.entries(els.views).forEach(([name, element]) => {
     element.classList.toggle("active", name === viewName);
@@ -71,12 +90,13 @@ function setActiveView(viewName) {
   els.navBtns.forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.view === viewName);
   });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function setPreview(file, previewUrl) {
   state.selectedFile = file;
   state.selectedPreviewUrl = previewUrl || "";
-  els.selectedFileTip.textContent = file ? `当前图片：${file.name}` : "";
+  els.selectedFileTip.textContent = file ? `已选择：${file.name}` : "";
   if (previewUrl) {
     els.previewImage.src = previewUrl;
     els.previewImage.classList.remove("hidden");
@@ -96,6 +116,14 @@ function setRecognizeError(message) {
   }
   els.recognizeError.textContent = message;
   els.recognizeError.classList.remove("hidden");
+}
+
+function applyFile(file) {
+  if (!file) return;
+  const previewUrl = URL.createObjectURL(file);
+  setPreview(file, previewUrl);
+  document.querySelectorAll(".demo-item").forEach((node) => node.classList.remove("active"));
+  setRecognizeError("");
 }
 
 async function requestJson(url, options = {}) {
@@ -130,12 +158,15 @@ function renderDemoGrid() {
   state.demoItems.forEach((item) => {
     const div = document.createElement("div");
     div.className = "demo-item";
-    div.dataset.filename = item.filename;
     div.innerHTML = `
-      <img src="${toApiUrl(item.thumb)}" alt="${item.patternName}" />
-      <div><strong>${safeText(item.patternName)}</strong></div>
-      <div class="muted">${safeText(item.filename)}</div>
+      <img src="${toApiUrl(item.thumb)}" alt="${safeText(item.patternName)}" />
+      <div class="demo-item-body">
+        <strong>${safeText(item.patternName)}</strong>
+        <div class="muted">${safeText(item.filename)}</div>
+      </div>
     `;
+    const img = div.querySelector("img");
+    img.onerror = () => imgOnError(img);
     div.addEventListener("click", () => selectDemoItem(item, div));
     els.demoGrid.appendChild(div);
   });
@@ -148,15 +179,31 @@ async function selectDemoItem(item, element) {
   let blob;
   try {
     const res = await fetch(toApiUrl(item.thumb));
-    blob = await res.blob();
+    if (res.ok) blob = await res.blob();
   } catch (_) {
-    blob = new Blob(["demo"], { type: "image/jpeg" });
+    /* ignore */
   }
+  if (!blob) blob = new Blob(["demo"], { type: "image/jpeg" });
 
   const file = new File([blob], item.filename, { type: blob.type || "image/jpeg" });
-  const previewUrl = URL.createObjectURL(blob);
-  setPreview(file, previewUrl);
-  setRecognizeError("");
+  applyFile(file);
+}
+
+function renderArtifactCard(artifact) {
+  const item = document.createElement("article");
+  item.className = "artifact-item";
+  const imgSrc = toApiUrl(artifact.image);
+  item.innerHTML = `
+    <img src="${imgSrc}" alt="${safeText(artifact.name)}" />
+    <div class="artifact-item-body">
+      <strong>${safeText(artifact.name)}</strong>
+      <div class="artifact-meta">${safeText(artifact.period)} · ${safeText(artifact.object_type)}</div>
+      <p>${safeText(artifact.description)}</p>
+    </div>
+  `;
+  const img = item.querySelector("img");
+  img.onerror = () => imgOnError(img);
+  return item;
 }
 
 function renderKnowledgeFilterOptions() {
@@ -164,13 +211,14 @@ function renderKnowledgeFilterOptions() {
   state.patternList.forEach((pattern) => {
     (pattern.common_objects || []).forEach((name) => objectSet.add(name));
   });
-  const options = Array.from(objectSet).sort((a, b) => a.localeCompare(b, "zh-CN"));
-  options.forEach((name) => {
-    const option = document.createElement("option");
-    option.value = name;
-    option.textContent = name;
-    els.objectFilter.appendChild(option);
-  });
+  Array.from(objectSet)
+    .sort((a, b) => a.localeCompare(b, "zh-CN"))
+    .forEach((name) => {
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = name;
+      els.objectFilter.appendChild(option);
+    });
 }
 
 function renderPatternCards() {
@@ -189,48 +237,68 @@ function renderPatternCards() {
   filtered.forEach((pattern) => {
     const article = document.createElement("article");
     article.className = "pattern-item";
+    if (pattern.pattern_id === state.selectedPatternId) {
+      article.classList.add("is-selected");
+    }
+    const cover = patternCoverUrl(pattern);
+    const apiFallback = (pattern.image_examples || [])[0] ? toApiUrl(pattern.image_examples[0]) : "";
+    const tags = (pattern.keywords || [])
+      .slice(0, 3)
+      .map((k) => `<span class="tag">${safeText(k)}</span>`)
+      .join("");
+
     article.innerHTML = `
-      <h4>${safeText(pattern.name)}</h4>
-      <p class="muted">${safeText(pattern.visual_features)}</p>
-      <p>常见器物：${safeText((pattern.common_objects || []).join("、"))}</p>
+      <img class="pattern-item-thumb" src="${cover}" alt="${safeText(pattern.name)}" data-fallback="${apiFallback}" />
+      <div class="pattern-item-body">
+        <h4>${safeText(pattern.name)}</h4>
+        <p class="muted">${safeText(pattern.visual_features).slice(0, 48)}…</p>
+        <div class="pattern-tags">${tags}</div>
+      </div>
     `;
-    article.addEventListener("click", () => showPatternDetail(pattern));
+    const thumb = article.querySelector(".pattern-item-thumb");
+    thumb.onerror = function onThumbError() {
+      if (thumb.dataset.fallback && thumb.src !== thumb.dataset.fallback) {
+        thumb.src = thumb.dataset.fallback;
+        thumb.onerror = () => imgOnError(thumb);
+        return;
+      }
+      imgOnError(thumb);
+    };
+    article.addEventListener("click", () => showPatternDetail(pattern, article));
     els.patternGrid.appendChild(article);
   });
 }
 
-async function showPatternDetail(pattern) {
+async function showPatternDetail(pattern, cardEl) {
   const patternId = pattern.pattern_id;
+  state.selectedPatternId = patternId;
+  document.querySelectorAll(".pattern-item").forEach((el) => {
+    el.classList.toggle("is-selected", el === cardEl);
+  });
+
   let detail = pattern;
   let artifacts = [];
   try {
     detail = await requestJson(`${API_BASE}/api/patterns/${patternId}`);
     artifacts = await requestJson(`${API_BASE}/api/artifacts?pattern=${encodeURIComponent(patternId)}`);
   } catch (_) {
-    // 接口失败时回退到本地已加载数据，保证页面仍可展示。
     artifacts = [];
   }
 
   els.patternDetail.classList.remove("hidden");
   els.detailName.textContent = safeText(detail.name);
-  els.detailVisual.textContent = `视觉特征：${safeText(detail.visual_features)}`;
-  els.detailMeaning.textContent = `文化寓意：${safeText(detail.cultural_meaning)}`;
-  els.detailObjects.textContent = `常见器物：${safeText((detail.common_objects || []).join("、"))}`;
-  els.detailPeriods.textContent = `常见时期：${safeText((detail.periods || []).join("、"))}`;
-  els.detailTips.textContent = `鉴赏提示：${safeText(detail.appreciation_tips)}`;
+  els.detailVisual.innerHTML = `<strong>视觉特征</strong> ${safeText(detail.visual_features)}`;
+  els.detailMeaning.innerHTML = `<strong>文化寓意</strong> ${safeText(detail.cultural_meaning)}`;
+  els.detailObjects.innerHTML = `<strong>常见器物</strong> ${safeText((detail.common_objects || []).join("、"))}`;
+  els.detailPeriods.innerHTML = `<strong>常见时期</strong> ${safeText((detail.periods || []).join("、"))}`;
+  els.detailTips.innerHTML = `<strong>鉴赏提示</strong> ${safeText(detail.appreciation_tips)}`;
 
   els.detailArtifacts.innerHTML = "";
   artifacts.slice(0, 3).forEach((artifact) => {
-    const item = document.createElement("article");
-    item.className = "artifact-item";
-    item.innerHTML = `
-      <div><strong>${safeText(artifact.name)}</strong></div>
-      <div class="muted">${safeText(artifact.period)} · ${safeText(artifact.object_type)}</div>
-      <p>${safeText(artifact.description)}</p>
-      <img src="${toApiUrl(artifact.image)}" alt="${safeText(artifact.name)}" />
-    `;
-    els.detailArtifacts.appendChild(item);
+    els.detailArtifacts.appendChild(renderArtifactCard(artifact));
   });
+
+  els.patternDetail.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function renderResult(result) {
@@ -242,34 +310,41 @@ function renderResult(result) {
 
   els.resultEmpty.classList.add("hidden");
   els.resultContent.classList.remove("hidden");
-  els.resultPatternName.textContent = `${safeText(result.pattern_name)}（${safeText(result.pattern_id)}）`;
-  els.resultConfidence.textContent = `匹配度：${Math.round(Number(result.confidence || 0) * 100)}%`;
-  els.resultNote.textContent = safeText(result.note);
-  els.resultVisualReason.textContent = `视觉依据：${safeText(result.visual_reason)}`;
+
+  const pct = Math.round(Number(result.confidence || 0) * 100);
+  els.resultPatternName.textContent = safeText(result.pattern_name);
+  els.resultConfidence.textContent = `匹配度 ${pct}%`;
+  if (els.resultConfidenceFill) {
+    requestAnimationFrame(() => {
+      els.resultConfidenceFill.style.width = `${pct}%`;
+    });
+  }
+
+  const note = safeText(result.note);
+  els.resultNote.textContent = note;
+  els.resultNote.classList.toggle("hidden", !note);
+
+  els.resultVisualReason.textContent = safeText(result.visual_reason);
   els.resultExplanation.textContent = safeText(result.ai_explanation);
-  els.resultImage.src = state.selectedPreviewUrl || "";
-  els.resultImage.classList.toggle("hidden", !state.selectedPreviewUrl);
+
+  if (state.selectedPreviewUrl) {
+    els.resultImage.src = state.selectedPreviewUrl;
+    els.resultImage.classList.remove("hidden");
+  } else {
+    els.resultImage.classList.add("hidden");
+  }
 
   const knowledge = result.knowledge || {};
   els.knowledgeList.innerHTML = `
-    <li>文化寓意：${safeText(knowledge.meaning)}</li>
-    <li>常见器物：${safeText((knowledge.common_objects || []).join("、"))}</li>
-    <li>常见时期：${safeText((knowledge.periods || []).join("、"))}</li>
-    <li>鉴赏提示：${safeText(knowledge.appreciation)}</li>
+    <li><strong>文化寓意</strong> ${safeText(knowledge.meaning)}</li>
+    <li><strong>常见器物</strong> ${safeText((knowledge.common_objects || []).join("、"))}</li>
+    <li><strong>常见时期</strong> ${safeText((knowledge.periods || []).join("、"))}</li>
+    <li><strong>鉴赏提示</strong> ${safeText(knowledge.appreciation)}</li>
   `;
 
-  const artifacts = result.similar_artifacts || [];
   els.artifactList.innerHTML = "";
-  artifacts.forEach((artifact) => {
-    const item = document.createElement("article");
-    item.className = "artifact-item";
-    item.innerHTML = `
-      <div><strong>${safeText(artifact.name)}</strong></div>
-      <div class="muted">${safeText(artifact.period)} · ${safeText(artifact.object_type)}</div>
-      <p>${safeText(artifact.description)}</p>
-      <img src="${toApiUrl(artifact.image)}" alt="${safeText(artifact.name)}" />
-    `;
-    els.artifactList.appendChild(item);
+  (result.similar_artifacts || []).forEach((artifact) => {
+    els.artifactList.appendChild(renderArtifactCard(artifact));
   });
 }
 
@@ -309,11 +384,46 @@ async function initData() {
   renderPatternCards();
 }
 
+function bindDropZone() {
+  const zone = els.fileDropZone;
+  if (!zone) return;
+
+  ["dragenter", "dragover"].forEach((evt) => {
+    zone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      zone.classList.add("is-dragover");
+    });
+  });
+
+  ["dragleave", "drop"].forEach((evt) => {
+    zone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      zone.classList.remove("is-dragover");
+    });
+  });
+
+  zone.addEventListener("drop", (e) => {
+    const file = e.dataTransfer?.files?.[0];
+    if (file) applyFile(file);
+  });
+}
+
 function bindEvents() {
   els.apiBaseTip.textContent = API_BASE;
 
   els.navBtns.forEach((btn) => {
     btn.addEventListener("click", () => setActiveView(btn.dataset.view));
+  });
+
+  if (els.brandLink) {
+    els.brandLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      setActiveView("home");
+    });
+  }
+
+  document.querySelectorAll("[data-goto]").forEach((btn) => {
+    btn.addEventListener("click", () => setActiveView(btn.dataset.goto));
   });
 
   els.homeStartBtn.addEventListener("click", () => setActiveView("recognize"));
@@ -322,34 +432,36 @@ function bindEvents() {
 
   els.fileInput.addEventListener("change", (event) => {
     const file = event.target.files?.[0];
-    if (!file) return;
-    const previewUrl = URL.createObjectURL(file);
-    setPreview(file, previewUrl);
-    document.querySelectorAll(".demo-item").forEach((node) => node.classList.remove("active"));
-    setRecognizeError("");
+    if (file) applyFile(file);
   });
 
+  bindDropZone();
   els.searchInput.addEventListener("input", renderPatternCards);
   els.objectFilter.addEventListener("change", renderPatternCards);
 }
 
 async function checkBackendHealth() {
+  const pill = els.backendStatus;
+  pill.classList.remove("is-ok", "is-error");
   try {
     const result = await requestJson(`${API_BASE}/api/health`);
     if (result.status === "ok") {
-      els.backendStatus.textContent = "后端状态：正常";
+      pill.textContent = "服务正常";
+      pill.classList.add("is-ok");
       return;
     }
   } catch (_) {
-    // ignore
+    /* ignore */
   }
-  els.backendStatus.textContent = "后端状态：不可用（请先启动 backend/app.py）";
+  pill.textContent = "后端未连接";
+  pill.classList.add("is-error");
 }
 
 async function bootstrap() {
   bindEvents();
   renderResult(null);
   setPreview(null, "");
+  if (els.resultConfidenceFill) els.resultConfidenceFill.style.width = "0%";
   await checkBackendHealth();
   try {
     await initData();
