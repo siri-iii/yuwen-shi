@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>玉纹识 - AI 玉器纹样识别与文化解读系统</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">玉纹识</div>
+    <nav class="nav">
+      <button class="nav-btn active" data-view="home">首页</button>
+      <button class="nav-btn" data-view="recognize">开始识别</button>
+      <button class="nav-btn" data-view="knowledge">知识库</button>
+      <button class="nav-btn" data-view="about">项目说明</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="view-home" class="view active">
+      <div class="hero">
+        <h1>AI 玉器纹样识别与文化解读系统</h1>
+        <p>上传玉器图片，识别传统纹样，理解文化内涵。</p>
+        <div class="hero-actions">
+          <button id="home-start-btn" class="btn primary">开始识别</button>
+          <button id="home-knowledge-btn" class="btn">浏览知识库</button>
+        </div>
+      </div>
+      <div class="feature-grid">
+        <article class="card">
+          <h3>图像识别</h3>
+          <p>上传图片后调用后端接口返回纹样类别与匹配度。</p>
+        </article>
+        <article class="card">
+          <h3>文化解读</h3>
+          <p>自动生成纹样文化解释文本，辅助理解纹样意义。</p>
+        </article>
+        <article class="card">
+          <h3>相似案例</h3>
+          <p>展示同类纹样玉器案例，包含器物名、朝代与简介。</p>
+        </article>
+        <article class="card">
+          <h3>知识库浏览</h3>
+          <p>浏览 8 类纹样，按关键词与器型快速筛选。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="view-recognize" class="view">
+      <div class="panel">
+        <h2>上传识别</h2>
+        <p class="muted">支持 jpg / jpeg / png。建议优先使用示例图片保证演示稳定。</p>
+        <div class="form-row">
+          <input id="file-input" type="file" accept="image/png,image/jpeg" />
+          <button id="recognize-btn" class="btn primary">开始识别</button>
+        </div>
+        <div id="selected-file-tip" class="muted"></div>
+      </div>
+
+      <div class="panel">
+        <h3>示例图片</h3>
+        <p class="muted">点击任一示例将自动准备对应文件名并可直接识别。</p>
+        <div id="demo-grid" class="demo-grid"></div>
+      </div>
+
+      <div class="panel">
+        <h3>图片预览</h3>
+        <div class="preview-wrap">
+          <img id="preview-image" alt="预览图" />
+          <div id="preview-placeholder" class="muted">尚未选择图片</div>
+        </div>
+      </div>
+
+      <div id="loading-box" class="loading hidden">正在分析纹样特征，请稍候...</div>
+      <div id="recognize-error" class="error hidden"></div>
+    </section>
+
+    <section id="view-result" class="view">
+      <div class="panel">
+        <h2>识别结果</h2>
+        <div id="result-empty" class="muted">还没有识别结果，请先前往“开始识别”。</div>
+        <div id="result-content" class="hidden">
+          <div class="result-layout">
+            <div>
+              <h3 id="result-pattern-name"></h3>
+              <p id="result-confidence"></p>
+              <p id="result-note" class="muted"></p>
+              <p id="result-visual-reason"></p>
+              <h4>AI 文化讲解</h4>
+              <p id="result-explanation" class="text-block"></p>
+            </div>
+            <div class="preview-wrap">
+              <img id="result-image" alt="识别原图" />
+            </div>
+          </div>
+
+          <div class="split">
+            <div>
+              <h4>文化信息</h4>
+              <ul id="knowledge-list"></ul>
+            </div>
+            <div>
+              <h4>相似案例</h4>
+              <div id="artifact-list" class="artifact-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-knowledge" class="view">
+      <div class="panel">
+        <h2>纹样知识库</h2>
+        <div class="form-row">
+          <input id="search-input" type="text" placeholder="输入纹样名或关键词" />
+          <select id="object-filter">
+            <option value="">全部器型</option>
+          </select>
+        </div>
+        <div id="pattern-grid" class="pattern-grid"></div>
+      </div>
+
+      <div id="pattern-detail" class="panel hidden">
+        <h3 id="detail-name"></h3>
+        <p id="detail-visual"></p>
+        <p id="detail-meaning"></p>
+        <p id="detail-objects"></p>
+        <p id="detail-periods"></p>
+        <p id="detail-tips"></p>
+        <h4>该纹样案例</h4>
+        <div id="detail-artifacts" class="artifact-list"></div>
+      </div>
+    </section>
+
+    <section id="view-about" class="view">
+      <div class="panel">
+        <h2>项目说明</h2>
+        <p>
+          玉纹识是一个课程展示型系统，目标是帮助学习者通过图片识别理解玉器纹样与文化内涵。
+          系统强调展示流程完整与识别结果稳定，不用于专业鉴定。
+        </p>
+        <ul>
+          <li>核心流程：上传图片 → 纹样识别 → 文化解读 → 相似案例 → 知识库浏览</li>
+          <li>识别策略：示例文件名映射优先，未命中时 pHash 相似度回退</li>
+          <li>数据范围：8 类常见纹样，JSON 知识库与案例库</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>后端接口地址：</span>
+    <code id="api-base-tip"></code>
+    <span class="dot">·</span>
+    <span id="backend-status">后端状态检查中...</span>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
