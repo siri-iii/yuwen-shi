@@ -40,7 +40,7 @@
           <h1>玉纹识</h1>
           <p class="hero-lead">上传玉器影像，识别传统纹样，读懂千年玉文化。</p>
           <div class="hero-actions">
-            <button id="home-start-btn" class="btn btn-gold">开始识别</button>
+            <button id="home-start-btn" class="btn btn-start" type="button">开始识别</button>
             <button id="home-knowledge-btn" class="btn btn-ghost">浏览知识库</button>
           </div>
           <div class="hero-stats">
@@ -95,7 +95,7 @@
             <span class="drop-hint">字段名将作为演示映射依据（示例图请用预设文件名）</span>
           </label>
           <div id="selected-file-tip" class="file-tip muted"></div>
-          <button id="recognize-btn" class="btn btn-gold btn-block">开始识别</button>
+          <button id="recognize-btn" class="btn btn-start btn-block" type="button">开始识别</button>
         </div>
 
         <div class="panel glass preview-panel">
@@ -134,39 +134,60 @@
         <button class="btn btn-gold" type="button" data-goto="recognize">去上传识别</button>
       </div>
 
-      <div id="result-content" class="hidden">
-        <div class="result-hero panel glass">
-          <div class="result-hero-text">
-            <p class="eyebrow">可能识别为</p>
-            <h3 id="result-pattern-name"></h3>
-            <div class="confidence-wrap">
-              <div class="confidence-bar" aria-hidden="true">
-                <div id="result-confidence-fill" class="confidence-fill"></div>
+      <div id="result-content" class="result-layout hidden">
+        <div class="result-hero">
+          <div class="result-hero-card">
+            <div class="result-hero-text">
+              <span class="result-badge">纹样判定</span>
+              <p class="result-eyebrow">可能识别为</p>
+              <h3 id="result-pattern-name" class="result-pattern-title"></h3>
+              <div class="confidence-wrap">
+                <div class="confidence-meta">
+                  <span id="result-confidence-pct" class="confidence-pct">0</span>
+                  <span class="confidence-unit">%</span>
+                </div>
+                <div class="confidence-bar" aria-hidden="true">
+                  <div id="result-confidence-fill" class="confidence-fill"></div>
+                </div>
+                <p id="result-confidence" class="confidence-label"></p>
               </div>
-              <p id="result-confidence" class="confidence-label"></p>
+              <p id="result-note" class="result-note"></p>
+              <blockquote id="result-visual-reason" class="visual-reason"></blockquote>
             </div>
-            <p id="result-note" class="result-note"></p>
-            <p id="result-visual-reason" class="visual-reason"></p>
-          </div>
-          <div class="preview-wrap result-image-wrap">
-            <img id="result-image" alt="识别原图" />
+            <figure class="result-image-frame">
+              <img id="result-image" alt="识别原图" />
+            </figure>
           </div>
         </div>
 
-        <div class="panel glass">
-          <h3 class="panel-title">AI 文化讲解</h3>
-          <p id="result-explanation" class="text-block explanation"></p>
-        </div>
-
-        <div class="split">
-          <div class="panel glass">
-            <h3 class="panel-title">文化信息</h3>
-            <ul id="knowledge-list" class="info-list"></ul>
+        <article class="result-card result-card--explanation">
+          <header class="result-card-head">
+            <span class="result-card-icon" aria-hidden="true">释</span>
+            <div>
+              <h3 class="result-card-title">AI 文化讲解</h3>
+              <p class="result-card-sub">基于纹样知识库生成的鉴赏解读</p>
+            </div>
+          </header>
+          <div class="result-card-body">
+            <p id="result-explanation" class="explanation-text"></p>
           </div>
-          <div class="panel glass">
-            <h3 class="panel-title">相似案例</h3>
+        </article>
+
+        <div class="result-split">
+          <article class="result-card">
+            <header class="result-card-head result-card-head--compact">
+              <span class="result-card-icon" aria-hidden="true">典</span>
+              <h3 class="result-card-title">文化信息</h3>
+            </header>
+            <ul id="knowledge-list" class="knowledge-grid"></ul>
+          </article>
+          <article class="result-card">
+            <header class="result-card-head result-card-head--compact">
+              <span class="result-card-icon" aria-hidden="true">荐</span>
+              <h3 class="result-card-title">相似案例</h3>
+            </header>
             <div id="artifact-list" class="artifact-list artifact-list--grid"></div>
-          </div>
+          </article>
         </div>
       </div>
     </section>

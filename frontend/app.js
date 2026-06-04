@@ -36,6 +36,7 @@ const els = {
   resultContent: document.getElementById("result-content"),
   resultPatternName: document.getElementById("result-pattern-name"),
   resultConfidence: document.getElementById("result-confidence"),
+  resultConfidencePct: document.getElementById("result-confidence-pct"),
   resultConfidenceFill: document.getElementById("result-confidence-fill"),
   resultNote: document.getElementById("result-note"),
   resultVisualReason: document.getElementById("result-visual-reason"),
@@ -313,7 +314,8 @@ function renderResult(result) {
 
   const pct = Math.round(Number(result.confidence || 0) * 100);
   els.resultPatternName.textContent = safeText(result.pattern_name);
-  els.resultConfidence.textContent = `匹配度 ${pct}%`;
+  if (els.resultConfidencePct) els.resultConfidencePct.textContent = String(pct);
+  els.resultConfidence.textContent = `纹样匹配度`;
   if (els.resultConfidenceFill) {
     requestAnimationFrame(() => {
       els.resultConfidenceFill.style.width = `${pct}%`;
@@ -335,12 +337,21 @@ function renderResult(result) {
   }
 
   const knowledge = result.knowledge || {};
-  els.knowledgeList.innerHTML = `
-    <li><strong>文化寓意</strong> ${safeText(knowledge.meaning)}</li>
-    <li><strong>常见器物</strong> ${safeText((knowledge.common_objects || []).join("、"))}</li>
-    <li><strong>常见时期</strong> ${safeText((knowledge.periods || []).join("、"))}</li>
-    <li><strong>鉴赏提示</strong> ${safeText(knowledge.appreciation)}</li>
-  `;
+  const knowledgeRows = [
+    { label: "文化寓意", value: safeText(knowledge.meaning) },
+    { label: "常见器物", value: safeText((knowledge.common_objects || []).join("、")) },
+    { label: "常见时期", value: safeText((knowledge.periods || []).join("、")) },
+    { label: "鉴赏提示", value: safeText(knowledge.appreciation) },
+  ];
+  els.knowledgeList.innerHTML = knowledgeRows
+    .map(
+      (row) => `
+    <li class="knowledge-item">
+      <span class="knowledge-label">${row.label}</span>
+      <p class="knowledge-value">${row.value}</p>
+    </li>`
+    )
+    .join("");
 
   els.artifactList.innerHTML = "";
   (result.similar_artifacts || []).forEach((artifact) => {
